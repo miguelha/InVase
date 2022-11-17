@@ -35,7 +35,7 @@ An Arduino based smart vase system with real time monitoring and automatic irrig
 
 [Miguel Hirche](https://github.com/miguelha) (miguelhirchealmeida@gmail.com)
 
-[Duarte Casal](https://github.com/miguelha) (duartebraga1@outlook.pt)
+[Duarte Casal](https://github.com/Duarte99) (duartebraga1@outlook.pt)
 
 ## License
 
