@@ -9,7 +9,6 @@ void setup(){
 void loop(){
   int readData = DHT.read11(2);
 
-
   switch(readData)
   {
     case DHTLIB_OK: 
@@ -36,5 +35,5 @@ void loop(){
   Serial.print(h);
   Serial.println("%");
 
-  delay(5000);
+  delay(2500);
 }
