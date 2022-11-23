@@ -10,7 +10,7 @@
 // range [0, 100], where HIGHEST is the maximum value obtained during the sensor calibration.
 // The mapped value of the level sensor is passed by reference. A boolean variable which indicates
 // if the water level is below a specific threshold is also passed by reference.
-void readWaterLevel(const int waterLevelPin, int threshold, int &waterLevelValue, bool &waterLow) {
+void readWaterLevel(const int waterLevelPin, int threshold, int &waterLevelValue, bool &waterLow){
     waterLevelValue = map(analogRead(waterLevelPin), 0, 350, 0, 100); // calibrate sensor to find highest value and replace third parameter
     if(waterLevelValue < threshold) waterLow = true;
     else waterLow = false;
@@ -20,7 +20,7 @@ void readWaterLevel(const int waterLevelPin, int threshold, int &waterLevelValue
 // [0, HIGHEST] to range [0, 100], where HIGHEST is the maximum value obtained during the sensor calibration.
 // The mapped value of the soil moisture sensor is passed by reference. A boolean variable which indicates
 // if the moisture level is below a specific threshold is also passed by reference.
-void readSoilMoisture(const int soilMoisturePin, int threshold, int &soilMoistureValue, bool &moistureLow) {
+void readSoilMoisture(const int soilMoisturePin, int threshold, int &soilMoistureValue, bool &moistureLow){
     soilMoistureValue = map(analogRead(soilMoisturePin), 0, 350, 0, 100); // calibrate sensor to find highest value and replace third parameter
     if(soilMoistureValue < threshold) moistureLow = true;
     else moistureLow = false;
