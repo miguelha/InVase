@@ -1,6 +1,7 @@
 // main.ino (23/11/2022)         |
 // Miguel Hirche & Duarte Casal  |
-// Main file                     |
+// Update cycle and bluetooth    |
+// communication                 |
 // ______________________________|
 
 #include <dht.h>
