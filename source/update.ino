@@ -1,4 +1,4 @@
-// main.ino (23/11/2022)         |
+// main.ino (28/11/2022)         |
 // Miguel Hirche & Duarte Casal  |
 // Update cycle and bluetooth    |
 // communication                 |
@@ -10,12 +10,12 @@
 // WATER LEVEL SENSOR
 const int waterLevelPin = A0;
 int waterLevelValue;
-bool waterLow;
+string waterState;
 
 // SOIL MOISTURE SENSOR
 const int soilMoisturePin = A1;
 int soilMoistureValue;
-bool moistureLow;
+string moistureState;
 
 // DHT11 (TEMPERATURE & HUMIDITY)
 const int dhtPin = 2;
