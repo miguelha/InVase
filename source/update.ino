@@ -10,12 +10,12 @@
 // WATER LEVEL SENSOR
 const int waterLevelPin = A0;
 int waterLevelValue;
-string waterState;
+string waterLevelState;
 
 // SOIL MOISTURE SENSOR
 const int soilMoisturePin = A1;
 int soilMoistureValue;
-string moistureState;
+string soilMoistureState;
 
 // DHT11 (TEMPERATURE & HUMIDITY)
 const int dhtPin = 2;
@@ -42,12 +42,13 @@ void loop(){
 
     // UPDATE CYCLE
     while(millis() - initialTime < updateTime){
-        readWaterLevel(waterLevelPin, 35, &waterLevelValue, &waterLow);
-        readSoilMoisture(soilMoisturePin, 30, &soilMoistureValue, &moistureLow);
+        readWaterLevel(waterLevelPin, 35, &waterLevelValue, &waterLevelState);
+        readSoilMoisture(soilMoisturePin, 30, &soilMoistureValue, &soilMoistureState);
         readTemperature(dht, dhtPin, 18, 30, &tempValue, &tempState);
         readHumidity(dht, dhtPin, 40, 70, &humValue, &humState);
 
         // SEND DATA TO APP VIA BLUETOOTH
+        sendData(tempValue, humValue, soilMoistureValue, waterLevelValue, tempState, humState, soilMoistureState, waterLevelState)
 
         // ACTUATE WATER PUMP AFTER AT LEAST 5 MINUTES FROM LAST ACTUATION
         if(moistureLow && numCycles >= 30){
