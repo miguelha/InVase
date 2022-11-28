@@ -1,6 +1,7 @@
-// sensors.ino (23/11/2022)      |
+// sensors.ino (28/11/2022)      |
 // Miguel Hirche & Duarte Casal  |
-// Functions for sensors         |
+// Functions for sensors and     |
+// bluetooth data transmission   |
 // ______________________________|
 
 // include dht.h library and add DHTlib-0.1.35.zip from source/lib/ to build in Arduino IDE
@@ -10,8 +11,8 @@
 // range [0, 100], where HIGHEST is the maximum value obtained during the sensor calibration.
 // The mapped value of the level sensor is passed by reference. A boolean variable which indicates
 // if the water level is below a specific threshold is also passed by reference.
-void readWaterLevel(const int waterLevelPin, int threshold, int &waterLevelValue, bool &waterLow){
-    waterLevelValue = map(analogRead(waterLevelPin), 0, 350, 0, 100); // calibrate sensor to find highest value and replace third parameter
+void readWaterLevel(const int waterLevelPin, int threshold, int &waterLevelValue, string &waterState){
+    waterLevelValue = map(analogRead(waterLevelPin), 480, 660, 0, 100); // [480, 660] is the range obtained through calibration for the wet sensor
     if(waterLevelValue < threshold) waterLow = true;
     else waterLow = false;
 }
@@ -20,8 +21,8 @@ void readWaterLevel(const int waterLevelPin, int threshold, int &waterLevelValue
 // [0, HIGHEST] to range [0, 100], where HIGHEST is the maximum value obtained during the sensor calibration.
 // The mapped value of the soil moisture sensor is passed by reference. A boolean variable which indicates
 // if the moisture level is below a specific threshold is also passed by reference.
-void readSoilMoisture(const int soilMoisturePin, int threshold, int &soilMoistureValue, bool &moistureLow){
-    soilMoistureValue = map(analogRead(soilMoisturePin), 0, 350, 0, 100); // calibrate sensor to find highest value and replace third parameter
+void readSoilMoisture(const int soilMoisturePin, int threshold, int &soilMoistureValue, string &moistureState){
+    soilMoistureValue = map(analogRead(soilMoisturePin), 0, 1024, 0, 100); // [480, 660] is the range obtained through calibration for the wet sensor
     if(soilMoistureValue < threshold) moistureLow = true;
     else moistureLow = false;
 }
