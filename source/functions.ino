@@ -72,5 +72,5 @@ String humState, String soilMoistureState, String waterLevelState){
     Serial.print("|");
     Serial.print(soilMoistureState);
     Serial.print("|");
-    Serial.print(waterLevelState);
+    Serial.println(waterLevelState);
 }
