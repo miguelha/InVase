@@ -23,7 +23,10 @@ int tempValue;
 int humValue;
 String tempState;
 String humState;
-dht* DHT;
+dht DHT;
+
+// WATER PUMP
+const int waterPumpPin = 3;
 
 // CYCLE
 unsigned long initialTime = 0;
@@ -33,10 +36,7 @@ int numCycles = 0;
 
 void setup(){
     Serial.begin(9600);
-    pinMode(dhtPin, INPUT);
-
-    // BLUETOOTH COMMUNICATION
-
+    pinMode(waterPumpPin, OUTPUT);
 }
 
 void loop(){
@@ -46,16 +46,16 @@ void loop(){
     if(currentTime - initialTime >= updateTime){
         readWaterLevel(waterLevelPin, 35, waterLevelValue, waterLevelState);
         readSoilMoisture(soilMoisturePin, 30, soilMoistureValue, soilMoistureState);
-        readTemperature(DHT, dhtPin, 18, 30, tempValue, tempState);
-        readHumidity(DHT, dhtPin, 40, 70, humValue, humState);
-
+        readTempHum(DHT, dhtPin, 18, 30, 40, 70, tempValue, humValue, tempState, humState);
+        
         // SEND DATA TO APP VIA BLUETOOTH
         sendData(tempValue, humValue, soilMoistureValue, waterLevelValue, tempState, humState, soilMoistureState, waterLevelState);
 
         // ACTUATE WATER PUMP AFTER AT LEAST 5 MINUTES FROM LAST ACTUATION
-        /*if(moistureLow && numCycles >= 30){
-
-
+        /*if((soilMoistureState == "LOW") && (numCycles >= 30)){
+            digitalWrite(waterPumpPin, HIGH);
+            delay(5000);
+            digitalWrite(waterPumpPin, LOW);
             numCycles = 0;
         }
 

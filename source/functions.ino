@@ -5,7 +5,6 @@
 // ______________________________|
 
 // include dht.h library and add DHTlib-0.1.35.zip from source/lib/ to build in Arduino IDE
-#include <dht.h>
 
 // readWaterLevel reads the value on the level sensor (analog pin) and maps the value from range [0, HIGHEST] to
 // range [0, 100], where HIGHEST is the maximum value obtained during the sensor calibration.
@@ -27,26 +26,19 @@ void readSoilMoisture(const int soilMoisturePin, int threshold, int &soilMoistur
     else soilMoistureState = "GOOD";
 }
 
-// readTemperature reads the temperature value of the DHT11 sensor, and passes it by reference, as well as
-// the state of the value, according to the parameters tempMin and tempMax. It also takes the DHT object as
-// a pointer to avoid copying the object at every function call (every update cycle).
-void readTemperature(dht* DHT, const int dhtPin, int tempMin, int tempMax, int &tempValue, String &tempState){
-    int readData = DHT->read11(dhtPin);
+// readTempHum reads the temperature value of the DHT11 sensor, and passes it by reference, as well as
+// the state of the value, according to the parameters tempMin and tempMax. It also reads the humidity value
+// of the DHT11 sensor in the same function (to avoid reading twice faster than the polling rate), and passes
+// it by reference, as well as the sate of the value, according to the parameters humMin and humMax.
+void readTempHum(dht DHT, const int dhtPin, int tempMin, int tempMax, int humMin, int humMax, int &tempValue, int &humValue, String &tempState, String &humState){
+    int readData = DHT.read11(dhtPin);
 
-    tempValue = DHT->temperature;
+    tempValue = DHT.temperature;
+    humValue = DHT.humidity;
 
     if(tempValue < tempMin) tempState = "LOW";
     else if(tempValue > tempMax) tempState = "HIGH";
     else tempState = "GOOD";
-}
-
-// readHumidity reads the humidity value of the DHT11 sensor, and passes it by reference, as well as
-// the state of the value, according to the parameters humMin and humMax. It also takes the DHT object as
-// a pointer to avoid copying the object at every function call (every update cycle).
-void readHumidity(dht* DHT, const int dhtPin, int humMin, int humMax, int &humValue, String &humState){
-    int readData = DHT->read11(dhtPin);
-
-    humValue = DHT->humidity;
 
     if(humValue < humMin) humState = "LOW";
     else if(humValue > humMax) humState = "HIGH";
@@ -58,13 +50,13 @@ void readHumidity(dht* DHT, const int dhtPin, int humMin, int humMax, int &humVa
 // reservoir level, respectively. Each piece of data (integer or string) is separated by the "|" delimiter.
 void sendData(int tempValue, int humValue, int soilMoistureValue, int waterLevelValue, String tempState,
 String humState, String soilMoistureState, String waterLevelState){
-    Serial.print(abs(tempValue));
+    Serial.print(tempValue);
     Serial.print("|");
-    Serial.print(abs(humValue));
+    Serial.print(humValue);
     Serial.print("|");
-    Serial.print(abs(soilMoistureValue));
+    Serial.print(soilMoistureValue);
     Serial.print("|");
-    Serial.print(abs(waterLevelValue));
+    Serial.print(waterLevelValue);
     Serial.print("|");
     Serial.print(tempState);
     Serial.print("|");
