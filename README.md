@@ -16,6 +16,7 @@ An Arduino based smart vase system with real time monitoring and automatic irrig
  - Bluetooth module - JDY-34 (HC05)
  - Android smartphone
  - Mini water pump (3~6V)
+ - Relay to control water pump
  - Breadboard
  - Resistors
  - Diode - 1N4007
