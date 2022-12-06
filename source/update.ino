@@ -23,7 +23,7 @@ int tempValue;
 int humValue;
 String tempState;
 String humState;
-dht DHT; // try as pointer now
+dht DHT;
 
 // WATER PUMP
 const int waterPumpPin = 3; // RELAY PIN
