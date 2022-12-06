@@ -1,4 +1,4 @@
-// sensors.ino (28/11/2022)      |
+// sensors.ino (06/12/2022)      |
 // Miguel Hirche & Duarte Casal  |
 // Functions for sensors and     |
 // bluetooth data transmission   |
@@ -29,7 +29,7 @@ void readSoilMoisture(const int soilMoisturePin, int threshold, int &soilMoistur
 // readTempHum reads the temperature value of the DHT11 sensor, and passes it by reference, as well as
 // the state of the value, according to the parameters tempMin and tempMax. It also reads the humidity value
 // of the DHT11 sensor in the same function (to avoid reading twice faster than the polling rate), and passes
-// it by reference, as well as the sate of the value, according to the parameters humMin and humMax.
+// it by reference, as well as the state of the value, according to the parameters humMin and humMax.
 void readTempHum(dht DHT, const int dhtPin, int tempMin, int tempMax, int humMin, int humMax, int &tempValue, int &humValue, String &tempState, String &humState){
     int readData = DHT.read11(dhtPin);
 
@@ -48,6 +48,7 @@ void readTempHum(dht DHT, const int dhtPin, int tempMin, int tempMax, int humMin
 // sendData will send data through the serial port, for the bluetooth module to communicate with the app.
 // The function prints the values and statuses for the temperature, humidity, soil moisture and
 // reservoir level, respectively. Each piece of data (integer or string) is separated by the "|" delimiter.
+// The newline character indicates the end of the data stream for the current update cycle.
 void sendData(int tempValue, int humValue, int soilMoistureValue, int waterLevelValue, String tempState,
 String humState, String soilMoistureState, String waterLevelState){
     Serial.print(tempValue);

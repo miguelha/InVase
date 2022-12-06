@@ -1,4 +1,4 @@
-// main.ino (28/11/2022)         |
+// main.ino (06/12/2022)         |
 // Miguel Hirche & Duarte Casal  |
 // Update cycle and bluetooth    |
 // communication                 |
@@ -23,10 +23,10 @@ int tempValue;
 int humValue;
 String tempState;
 String humState;
-dht DHT;
+dht DHT; // try as pointer now
 
 // WATER PUMP
-const int waterPumpPin = 3;
+const int waterPumpPin = 3; // RELAY PIN
 
 // CYCLE
 unsigned long initialTime = 0;
@@ -51,15 +51,15 @@ void loop(){
         // SEND DATA TO APP VIA BLUETOOTH
         sendData(tempValue, humValue, soilMoistureValue, waterLevelValue, tempState, humState, soilMoistureState, waterLevelState);
 
-        // ACTUATE WATER PUMP AFTER AT LEAST 5 MINUTES FROM LAST ACTUATION
-        /*if((soilMoistureState == "LOW") && (numCycles >= 30)){
+        // ACTUATE WATER PUMP AFTER AT LEAST 10 MINUTES FROM LAST ACTUATION
+        if((soilMoistureState == "LOW") && (numCycles >= 60)){
             digitalWrite(waterPumpPin, HIGH);
-            delay(5000);
+            delay(1500);
             digitalWrite(waterPumpPin, LOW);
             numCycles = 0;
         }
 
-        numCycles++;*/
+        numCycles++;
         initialTime = currentTime;
     }
 }
