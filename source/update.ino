@@ -32,11 +32,12 @@ const int waterPumpPin = 3; // RELAY PIN
 unsigned long initialTime = 0;
 unsigned long currentTime = 0;
 int updateTime = 10000;
-int numCycles = 0;
+int numCycles = 60; // START AT 60 SO WATER PUMP CAN BE ACTUATED ASAP
 
 void setup(){
     Serial.begin(9600);
     pinMode(waterPumpPin, OUTPUT);
+    digitalWrite(waterPumpPin, LOW);
 }
 
 void loop(){
