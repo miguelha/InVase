@@ -1,4 +1,4 @@
-// sensors.ino (08/12/2022)      |
+// functions.ino (08/12/2022)    |
 // Miguel Hirche & Duarte Casal  |
 // Functions for sensors and     |
 // bluetooth data transmission   |
