@@ -21,7 +21,7 @@ An Arduino based smart vase system with real time monitoring and automatic irrig
  - Breadboard
  - Resistors
  - Diode - 1N4007
- - 9V battery adapter
+ - Switching adapter 220VAC-12VDC
  - Buck Converter (step-down) - LM2596
  - Jumper wires
 
