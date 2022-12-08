@@ -1,4 +1,4 @@
-// main.ino (06/12/2022)         |
+// main.ino (08/12/2022)         |
 // Miguel Hirche & Duarte Casal  |
 // Update cycle and bluetooth    |
 // communication                 |
@@ -55,7 +55,7 @@ void loop(){
         // ACTUATE WATER PUMP AFTER AT LEAST 10 MINUTES FROM LAST ACTUATION
         if((soilMoistureState == "LOW") && (numCycles >= 60)){
             digitalWrite(waterPumpPin, HIGH);
-            delay(1500);
+            delay(800);
             digitalWrite(waterPumpPin, LOW);
             numCycles = 0;
         }

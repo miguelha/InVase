@@ -5,7 +5,7 @@ An Arduino based smart vase system with real time monitoring and automatic irrig
 ## Material list
 
  - Arduino IDE
- - App for bluetooth communication & data display
+ - App for bluetooth communication & data display (app in repository was made in MIT App Inventor)
  - Arduino Nano
  - Temperature and humidity sensor - DHT11
  - Light sensor - LDR
