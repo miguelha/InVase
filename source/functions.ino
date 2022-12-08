@@ -1,4 +1,4 @@
-// sensors.ino (06/12/2022)      |
+// sensors.ino (08/12/2022)      |
 // Miguel Hirche & Duarte Casal  |
 // Functions for sensors and     |
 // bluetooth data transmission   |
@@ -11,7 +11,9 @@
 // The mapped value of the level sensor is passed by reference. A boolean variable which indicates
 // if the water level is below a specific threshold is also passed by reference.
 void readWaterLevel(const int waterLevelPin, int threshold, int &waterLevelValue, String &waterLevelState){
-    waterLevelValue = map(analogRead(waterLevelPin), 480, 660, 0, 100); // [480, 660] is the range obtained through calibration for the wet sensor
+    int waterLevelReading = analogRead(waterLevelPin);
+    waterLevelReading = constrain(waterLevelReading, 400, 660); // Make sure no value is out of range for mapping
+    waterLevelValue = map(waterLevelReading, 400, 660, 0, 100); // [400, 660] is the range obtained through calibration for the wet sensor
     if(waterLevelValue < threshold) waterLevelState = "LOW";
     else waterLevelState = "GOOD";
 }
@@ -21,7 +23,9 @@ void readWaterLevel(const int waterLevelPin, int threshold, int &waterLevelValue
 // The mapped value of the soil moisture sensor is passed by reference. A boolean variable which indicates
 // if the moisture level is below a specific threshold is also passed by reference.
 void readSoilMoisture(const int soilMoisturePin, int threshold, int &soilMoistureValue, String &soilMoistureState){
-    soilMoistureValue = map(analogRead(soilMoisturePin), 0, 1024, 0, 100); // [480, 660] is the range obtained through calibration for the wet sensor
+    int soilMoistureReading = analogRead(soilMoisturePin);
+    soilMoistureReading = constrain(soilMoistureReading, 180, 400); // Make sure no value is out of range for mapping
+    soilMoistureValue = map(soilMoistureReading, 400, 180, 0, 100); // [400, 180] is the range obtained through calibration for the wet sensor
     if(soilMoistureValue < threshold) soilMoistureState = "LOW";
     else soilMoistureState = "GOOD";
 }
