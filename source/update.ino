@@ -43,6 +43,11 @@ void setup(){
 void loop(){
     currentTime = millis();
 
+    // WATER PUMP MANUAL ACTUATION
+    char waterPumpActuation = Serial.read();
+    if(waterPumpActuation == 'H') digitalWrite(waterPumpPin, HIGH); // ON
+    else if(waterPumpActuation == 'L') digitalWrite(waterPumpPin, LOW); // OFF
+
     // UPDATE CYCLE 
     if(currentTime - initialTime >= updateTime){
         readWaterLevel(waterLevelPin, 35, waterLevelValue, waterLevelState);
