@@ -6,27 +6,28 @@
 
 // include dht.h library and add DHTlib-0.1.35.zip from source/lib/ to build in Arduino IDE
 
-// readWaterLevel reads the value on the level sensor (analog pin) and maps the value from range [0, HIGHEST] to
-// range [0, 100], where HIGHEST is the maximum value obtained during the sensor calibration.
-// The mapped value of the level sensor is passed by reference. A boolean variable which indicates
-// if the water level is below a specific threshold is also passed by reference.
+// readWaterLevel reads the value on the level sensor (analog pin) and maps the value from range [400, 660] to
+// range [0, 100]. The mapped value of the level sensor is passed by reference. A 
+// boolean variable which indicates if the water level is below a specific threshold 
+// is also passed by reference.
 void readWaterLevel(const int waterLevelPin, int threshold, int &waterLevelValue, String &waterLevelState){
     int waterLevelReading = analogRead(waterLevelPin);
-    waterLevelReading = constrain(waterLevelReading, 400, 660); // Make sure no value is out of range for mapping
+    waterLevelReading = constrain(waterLevelReading, 400, 660); // make sure no value is out of range for mapping
     waterLevelValue = map(waterLevelReading, 400, 660, 0, 100); // [400, 660] is the range obtained through calibration for the wet sensor
     if(waterLevelValue < threshold) waterLevelState = "LOW";
     else waterLevelState = "GOOD";
 }
 
 // readSoilMoisture reads the value on the soil moisture sensor (analog pin) and maps the value from range 
-// [0, HIGHEST] to range [0, 100], where HIGHEST is the maximum value obtained during the sensor calibration.
-// The mapped value of the soil moisture sensor is passed by reference. A boolean variable which indicates
-// if the moisture level is below a specific threshold is also passed by reference.
-void readSoilMoisture(const int soilMoisturePin, int threshold, int &soilMoistureValue, String &soilMoistureState){
+// [180, 440] to range [0, 100]. The mapped value of the soil moisture sensor is 
+// passed by reference. A boolean variable which indicates if the moisture level is 
+// below a specific threshold is also passed by reference.
+void readSoilMoisture(const int soilMoisturePin, int smMin, int smMax, int &soilMoistureValue, String &soilMoistureState){
     int soilMoistureReading = analogRead(soilMoisturePin);
-    soilMoistureReading = constrain(soilMoistureReading, 180, 400); // Make sure no value is out of range for mapping
+    soilMoistureReading = constrain(soilMoistureReading, 180, 400); // make sure no value is out of range for mapping
     soilMoistureValue = map(soilMoistureReading, 400, 180, 0, 100); // [400, 180] is the range obtained through calibration for the wet sensor
-    if(soilMoistureValue < threshold) soilMoistureState = "LOW";
+    if(soilMoistureValue < smMin) soilMoistureState = "LOW";
+    else if(soilMoistureValue > smMax) soilMoistureState = "HIGH";
     else soilMoistureState = "GOOD";
 }
 

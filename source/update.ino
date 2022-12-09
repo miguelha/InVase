@@ -51,8 +51,8 @@ void loop(){
     // UPDATE CYCLE 
     if(currentTime - initialTime >= updateTime){
         readWaterLevel(waterLevelPin, 35, waterLevelValue, waterLevelState);
-        readSoilMoisture(soilMoisturePin, 30, soilMoistureValue, soilMoistureState);
-        readTempHum(DHT, dhtPin, 18, 30, 40, 70, tempValue, humValue, tempState, humState);
+        readSoilMoisture(soilMoisturePin, 30, 80, soilMoistureValue, soilMoistureState);
+        readTempHum(DHT, dhtPin, 18, 28, 40, 80, tempValue, humValue, tempState, humState);
         
         // SEND DATA TO APP VIA BLUETOOTH
         sendData(tempValue, humValue, soilMoistureValue, waterLevelValue, tempState, humState, soilMoistureState, waterLevelState);
