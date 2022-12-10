@@ -1,4 +1,4 @@
-// update.ino (08/12/2022)       |
+// update.ino (10/12/2022)       |
 // Miguel Hirche & Duarte Casal  |
 // Update cycle and bluetooth    |
 // communication                 |
