@@ -27,10 +27,10 @@ An Arduino based smart vase system with real time monitoring and automatic irrig
 
 ## Pinout & schematic
 
-** A0 - Water level sensor output **
-** A1 - Soil moisture sensor output **
-** D2 - DHT11 (Temperature & humidity) output **
-** D3 - Water pump (relay) output **
+**A0 - Water level sensor output**
+**A1 - Soil moisture sensor output**
+**D2 - DHT11 (Temperature & humidity) output**
+**D3 - Water pump (relay) output**
 
 * Any transformer than can be coupled with a regulator to generate regulated 5V output can be used as power for the project.
 
@@ -44,7 +44,7 @@ An Arduino based smart vase system with real time monitoring and automatic irrig
 
 ![InVase Schematic](schematic_invase.png)
 
-[Making of video](https://youtu.be/jraKmChVTTY)
+[MAKING OF VIDEO](https://youtu.be/jraKmChVTTY)
 
 ## Authors
 
